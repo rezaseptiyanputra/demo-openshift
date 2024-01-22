@@ -1,0 +1,189 @@
+﻿var htmlRptMenu = '<div class="nav navbar-collapse collapse rptmnu">'
+                    +'<div id="DeltaTopNavigation_Rpt" class="ms-core-navigation ms-dialogHidden">'
+                        +'<a name="startNavigation"></a>'
+                        +'<div id="zz11_TopNavigationMenu_Rpt" class="nav-container noindex ms-core-listMenu-horizontalBox">'
+                            +'<ul id="zz12_RootAspMenu_Rpt" class="root ms-core-listMenu-root static">'
+                                +'<li class="static selected">'
+                                    +'<ul class="static">'
+                                        +'<li class="static dynamic-children">'
+                                            +'<span class="static dynamic-children menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" tabindex="0"><span aria-haspopup="true" class="additional-background ms-navedit-flyoutArrow dynamic-children"><span class="menu-item-text">Reports</span></span></span>'
+                                            +'<ul class="dynamic" style="min-width: 84px;">'
+                                                +'<li class="dynamic">'
+                                                    +'<a class="dynamic menu-item ms-core-listMenu-item ms-displayInline new-window ms-navedit-linkNode" tabindex="0" href="https://www.plnindonesiapower.co.id/reports/annual-report/ar-indonesia-power-2021/index.aspx" target="_blank"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Annual Report</span></span></a>'
+                                                +'</li>'
+                                                +'<li class="dynamic">'
+                                                    +'<a class="dynamic menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" tabindex="0" href="https://www.plnindonesiapower.co.id/reports/sustainability-report/Sustainability-Report-Indonesia-Power-2021/index.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Sustainability Report</span></span></a>'
+                                                +'</li>'
+                                                +'<li class="dynamic">'
+                                                    +'<a class="dynamic menu-item ms-core-listMenu-item ms-displayInline new-window ms-navedit-linkNode" tabindex="0" href="https://www.plnindonesiapower.co.id/reports/statistic-report/Statistic-Report-Indonesia-Power-2021/index.aspx" target="_blank"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Statistic Report</span></span></a>'
+                                                +'</li>'
+                                                +'<li class="dynamic">'
+                                                    +'<a class="dynamic menu-item ms-core-listMenu-item ms-displayInline new-window ms-navedit-linkNode" tabindex="0" href="https://www.plnindonesiapower.co.id/id/komunikasi-berkelanjutan/Reports/Consolidated Financial Statement PT Indonesia Power December 31, 2021.pdf" target="_blank"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Financial Report</span></span></a>'
+                                                +'</li>'
+                                            +'</ul>'
+                                        +'</li>'
+                                        +'<li class="static">'
+                                            +'<a class="static menu-item ms-core-listMenu-item ms-displayInline new-window ms-navedit-linkNode" tabindex="0" href="https://www.plnindonesiapower.co.id/id/tata-kelola/Pages/Form-Aduan-WBS.aspx" target="_blank"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Whistle Blowing System</span></span></a>'
+                                        +'</li>'
+                                    +'</ul>'
+                                +'</li>'
+                            +'</ul>'
+                        +'</div>'
+                    +'</div>'
+                +'</div>';
+	
+	
+				jQuery(function($) {
+					$(document).ready(function() {
+						$('.ms-welcome-root').css('pointer-events', 'none');
+						$('.ms-welcome-root span').hide();
+						if (window.location.href.indexOf("/_layouts/15/people.aspx") > -1) {
+							$('#sideNavBox').show();
+							$('#mainbody').removeClass('col-md-12').addClass('col-md-9').css('width', '75%');
+							$('#ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager').hide()
+						}
+						if (window.location.href.indexOf("/_layouts/15/WrkTaskIP.aspx") > -1) {
+							$('input:button[value="Request Change"]').hide();
+							$('input:button[value="Reassign Task"]').hide();
+							$('table.ms-toolbar').hide()
+						}
+						$('.s4-breadcrumb-arrowcont').html('>').css("background-image", 'none')
+						
+						AddReportsMenu();
+						//initScroolDown();
+						initLeftMenuBasHeight();
+						
+						$(window).resize(function () {
+						setTimeout(function () {
+							AddReportsMenu();
+							initLeftMenuBasHeight();
+							//initScroolDown();
+							jQuery(jQuery(".list-unstyled.language-select").detach()).appendTo("#zz11_TopNavigationMenu_Rpt");
+						},100)
+						});
+					})
+				});
+				
+				function AddBreadCrumb(breadCrumbText, url) {
+					var currentSubsiteLi = $('li.s4-breadcrumbCurrentNode');
+					$('.s4-breadcrumbCurrentNode').addClass('s4-breadcrumbNode').removeClass('s4-breadcrumbCurrentNode').removeClass('currentFolder');
+					if (url === undefined) {
+						currentSubsiteLi.append('<ul class="s4-breadcrumbNode"><li class="s4-breadcrumbCurrentNode"><span class="s4-breadcrumb-arrowcont" style="background-image: none;">></span><a class="s4-breadcrumbCurrentNode currentFolder" href="#">Current BreadCrumb</a></li></ul>')
+					} else {
+						currentSubsiteLi.append('<ul class="s4-breadcrumbNode"><li class="s4-breadcrumbCurrentNode"><span class="s4-breadcrumb-arrowcont" style="background-image: none;">></span><a class="s4-breadcrumbCurrentNode currentFolder" href="' + url + '">Current BreadCrumb</a></li></ul>')
+					}
+					$('.currentFolder').text(breadCrumbText)
+				}
+				
+				function ChangePageTitle(text) {
+					$('#pageTitle span span span').text(text)
+				}
+				
+				function AddReportsMenu(){
+					if($('.rptmnu').length > 0){
+						$(".rptmnu").remove();
+					}
+					 var winScreen =  $(window).width();
+					 if(winScreen > 990){
+						$(htmlRptMenu).insertBefore('#topnavbar .navbar-inner .nav.navbar-collapse.collapse');
+						if($('#homeCarousel').length === 0){
+							$('#search-icon').remove();
+						var srcicon = '<div id="search-icon" class="search-icon"><span class="glyphicon glyphicon-search"></span></div>';
+						$('#zz1_TopNavigationMenu').append(srcicon);
+						$('#searchboxItem').clone().appendTo('#zz1_TopNavigationMenu');
+						$('#searchboxItem').remove();
+						$('#search-icon').css('float','right').css('display','contents');
+						$('#searchboxItem').css('display','none');
+						$('#search-icon').on('click',function(){
+							$('#search-icon').css('display','none');
+							$('#searchboxItem').css('display','block');
+					});
+						}
+					 }
+					 else{
+						 $(htmlRptMenu).insertAfter('#topnavbar .navbar-inner .nav.navbar-collapse.collapse');
+						 $('#zz11_TopNavigationMenu_Rpt').width($('.navbar-inner').width());
+						 $('#search-icon').css('display','none');
+					 }
+					
+					$(".rptmnu .static.dynamic-children").mouseenter(function() {
+						$(this).addClass('hover').addClass('shown');
+					}).mouseleave(function(){ $(this).removeClass('hover').removeClass('shown'); });
+				}
+				
+				function initLeftMenuBasHeight(){
+					var containerHeight = $('.indicator-container').height();
+						var temp = (containerHeight - 216) / 6;
+						$('.ip-left-menu-l').height(temp);
+				}
+				
+				function initScroolDown(){
+					var mvstring = '<div id="mro-dv" style="float: right;height: 10px;width: 10px;margin: 30px 0px 0px 30px;"></div>';
+					var scshadowstring = '<div id="scshadows" style="float: right;height: 10px;width: 10px;"></div>';
+					$('#mro-1-grid-3').css('float','left');
+					
+					if($('#mro-dv').length > 0){
+						$('#mro-dv').remove();
+					}
+					$(mvstring).insertBefore('#mro-1-grid-3');
+					
+					if($('#scshadows').length > 0){
+						$('#scshadows').remove();
+					}
+					$(scshadowstring).insertBefore('#Scroll-fixed');
+					
+					
+					
+					$('#Scroll-fixed').removeClass('hide');
+					$('#mro-1-grid-3').addClass('hide');
+					
+					var sf = document.getElementById('Scroll-fixed');
+					var sd = document.getElementById('mro-1-grid-3');
+					var mv = document.getElementById('mro-dv');
+					var sc = document.getElementById('scshadows');
+					
+					var tsf = sf.getBoundingClientRect().top;
+					var tsd = sd.getBoundingClientRect().top;
+					var tmv = mv.getBoundingClientRect().top;
+					var tsc = sc.getBoundingClientRect().top;
+					
+					if(tsd > 597){
+						$('#Scroll-fixed').removeClass('hide');
+					$('#mro-1-grid-3').addClass('hide');
+					}
+					
+					var marginleft = $(".content-section-wrapper .container").css("margin-left");
+					$('#Scroll-fixed').css('left',marginleft + ' !important');
+					$('#Scroll-fixed #scrollDown').css('margin-left','20px');
+					
+					
+					
+					$( "#s4-workspace" ).scroll(function() {
+					var sf = document.getElementById('Scroll-fixed');
+					var sd = document.getElementById('mro-1-grid-3');
+					var mv = document.getElementById('mro-dv');
+					var sc = document.getElementById('scshadows');
+					
+					var tsf = sf.getBoundingClientRect().top;
+					var tsd = sd.getBoundingClientRect().top;
+					var tmv = mv.getBoundingClientRect().top;
+					var tsc = sc.getBoundingClientRect().top;
+					
+					if(tmv <= tsc){
+						$('#Scroll-fixed').addClass('hide');
+						$('#mro-1-grid-3').removeClass('hide');
+					}
+					else{
+						$('#Scroll-fixed').removeClass('hide');
+						$('#mro-1-grid-3').addClass('hide');
+					}
+					
+					if(tsd > 597){
+						$('#Scroll-fixed').removeClass('hide');
+						$('#mro-1-grid-3').addClass('hide');
+						
+					}
+					
+					});
+					
+				}
