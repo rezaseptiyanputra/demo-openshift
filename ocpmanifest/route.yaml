@@ -1,7 +1,7 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: demo-ocp
+  name: demo-web-route
   namespace: demo-openshift-pipeline
 spec:
   host: demo-web.apps.demo.sss.lab
@@ -9,4 +9,4 @@ spec:
     targetPort: 8080
   to:
     kind: Service
-    name: demoocp-service
+    name: demo-web-service
