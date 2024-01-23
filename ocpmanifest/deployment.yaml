@@ -20,7 +20,7 @@ spec:
        sidecar.istio.io/inject: "true"
    spec:
      containers:
-       - image: demo-registry-quay-openshift-operators.apps.demo.sss.lab/quayadmin/demo-web:v1
+       - image: demo-registry-quay-openshift-operators.apps.demo.sss.lab/quayadmin/demo-web:v2
          resources:
             requests:
               memory: "64Mi"
