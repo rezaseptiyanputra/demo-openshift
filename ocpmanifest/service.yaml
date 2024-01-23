@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-web-service
+  name:  demo-webip-service
   namespace: demo-openshift-pipeline
 spec:
   ports:
