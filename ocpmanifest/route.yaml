@@ -1,10 +1,10 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: demo-web-route
+  name: demo-web-openshift02
   namespace: demo-openshift02
 spec:
-  host: demo-web.apps.demo.sss.lab
+  host: demo-openshift02.demo.sss.lab
   port:
     targetPort: 8080
   to:
