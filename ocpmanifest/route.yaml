@@ -9,4 +9,4 @@ spec:
     targetPort: 8080
   to:
     kind: Service
-    name: demo-web-service
+    name: demo-webip-service
