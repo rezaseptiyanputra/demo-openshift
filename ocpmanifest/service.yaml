@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demoocp-service
+  namespace: demo-openshift-pipeline
+spec:
+  ports:
+    - name: http-demo
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: html-frontend
+  type: ClusterIP
