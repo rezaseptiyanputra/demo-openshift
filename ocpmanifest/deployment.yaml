@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ labels:
+   app: html-frontend
+   version: 1.0.0
+ name: demo-deployment
+ namespace: demo-openshift-pipeline
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+     app: html-frontend
+ template:
+   metadata:
+     labels:
+       app: html-frontend
+       version: 1.0.0
+     annotations:
+       sidecar.istio.io/inject: "true"
+   spec:
+     containers:
+       - image: demo-registry-quay-openshift-operators.apps.demo.sss.lab/quayadmin/demo-web:v1
+         resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+         imagePullPolicy: Always
+         name: html-frontend
+         ports:
+           - containerPort: 8080
+     imagePullSecrets:
+     - name: quayadmin-credential
