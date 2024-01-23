@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demoocp-service
+  name: demo-servicemesh-service
   namespace: demo-openshift-pipeline
 spec:
   ports:
