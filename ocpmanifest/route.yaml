@@ -4,7 +4,7 @@ metadata:
   name: demo-web-openshift02
   namespace: demo-openshift-pipeline
 spec:
-  host: demo-openshift02.demo.sss.lab
+  host: demo-openshift02.apps.demo.sss.lab
   port:
     targetPort: 8080
   to:
